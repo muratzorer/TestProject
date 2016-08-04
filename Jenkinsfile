@@ -1,7 +1,9 @@
 node {
-	stage 'Stage 1'
-   
-		echo 'Hello World 1'
+	// Mark the code checkout 'stage'....
+	stage 'Checkout'
+
+	   // Checkout code from repository
+	   checkout scm
    
 	stage 'Stage 2'
    
