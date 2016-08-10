@@ -15,5 +15,9 @@ node {
 		
 	stage 'MSBuild'
 	
-		bat " ""${tool 'msbuild'}"" TestApplication.sln /p:Configuration=Release /p:Platform=""Any CPU"" /p:VisualStudioVersion=12.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+		bat "\"${tool 'msbuild'}\" TestApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:VisualStudioVersion=12.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+		
+	stage 'Archive build artifacts'
+	
+		archive 'MvcApplication/bin/Release/**'
 }
