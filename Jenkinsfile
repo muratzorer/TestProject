@@ -19,5 +19,5 @@ node {
 		
 	stage 'Archive build artifacts'
 	
-		archiveArtifacts 'deneme\\bin\\Release\\**'
+		archive 'MvcApplication/bin/Release/**'
 }
