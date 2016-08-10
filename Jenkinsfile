@@ -11,9 +11,9 @@ node {
 		
 	stage 'Nuget'
 	
-		bat 'C:\\Users\\MURAT\\Desktop\\nuget.exe restore TestApplication.sln'
+		bat 'nuget restore TestApplication.sln'
 		
 	stage 'MSBuild'
 	
-		echo 'build'
+		bat '\\${tool 'msbuild'}\\ TestApplication.sln /p:Configuration=Release /p:Platform=\\Any CPU\\ /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}'
 }
