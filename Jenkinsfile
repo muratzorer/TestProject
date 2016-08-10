@@ -11,7 +11,7 @@ node {
 		
 	stage 'Nuget'
 	
-		bat 'nuget restore TestApplication.sln'
+		bat 'C:\Users\MURAT\Desktop\nuget.exe restore TestApplication.sln'
 		
 	stage 'MSBuild'
 	
