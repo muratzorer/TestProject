@@ -19,5 +19,5 @@ node {
 		
 	stage 'Archive build artifacts'
 	
-		archive 'deneme\\bin\\Release\\**'
+		archiveArtifacts 'deneme\\bin\\Release\\**'
 }
