@@ -15,5 +15,5 @@ node {
 		
 	stage 'MSBuild'
 	
-		bat '\\${tool 'msbuild'}\\ TestApplication.sln /p:Configuration=Release /p:Platform=\\Any CPU\\ /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}'
+		bat bat "\"${tool 'msbuild'}\" TestApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
 }
