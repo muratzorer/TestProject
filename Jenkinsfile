@@ -4,10 +4,6 @@ node {
 
 	   // Checkout code from repository
 	   checkout scm
-   
-	stage 'Stage 2'
-   
-		echo 'Hello World 2'
 		
 	stage 'Nuget'
 	
