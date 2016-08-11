@@ -19,7 +19,8 @@ node { //node('windows') tags
 		stage 'Stash/Archive build artifacts'
 			waitUntil {
 				try {
-					archive 'MvcApplication/bin/Release/**'
+					//archive 'MvcApplication/bin/Release/**'
+					stash name: "release", includes: "MvcApplication/bin/Release/**"
 					true
 				} 
 				catch(error) {
