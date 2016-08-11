@@ -17,7 +17,7 @@ node {
 		
 	stage 'Stash/Archive build artifacts'
 	
-		dir('MvcApplication/bin/Release/**'') {stash name: 'release'}
+		archive 'MvcApplication/bin/Release/**'
 }
 
 checkpoint 'Completed tests'
