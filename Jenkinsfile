@@ -20,8 +20,7 @@ node { //node('windows') tags
 			waitUntil {
 				try {
 					//archive 'MvcApplication/bin/Release/**'
-					stash name: "release", includes: "MvcApplication/bin/Release/**"
-					true
+					stash name: "release", includes: "MvcApplication/bin/**"
 				} 
 				catch(error) {
 					timeout(time:30, unit:'SECONDS') {
