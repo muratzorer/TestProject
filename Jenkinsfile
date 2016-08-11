@@ -17,6 +17,18 @@ node { //node('windows') tags
 			}
 				
 		stage 'Stash/Archive build artifacts'
-			stash name: "release", includes: "MvcApplication/bin/**"
+			waitUntil {
+				try {
+					//archive 'MvcApplication/bin/Release/**'
+					stash name: "release", includes: "MvcApplication/bin/Release/**"
+					true
+				} 
+				catch(error) {
+					timeout(time:30, unit:'SECONDS') {
+						input "Retry the job ?"
+						false
+					}
+				}
+			}
 	}
 }
