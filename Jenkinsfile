@@ -17,6 +17,6 @@ node { //node('windows') tags
 			}
 				
 		stage 'Stash/Archive build artifacts'
-			stash name: "release", includes: "bin/Release/**"
+			stash name: "release", includes: "MvcApplication/bin/**"
 	}
 }
