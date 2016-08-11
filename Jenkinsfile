@@ -19,9 +19,3 @@ node {
 	
 		archive 'MvcApplication/bin/Release/**'
 }
-
-checkpoint 'Completed tests'
-
-node {
-    echo 'deployment'
-}
