@@ -19,3 +19,4 @@ node {
 	
 		archive 'MvcApplication/bin/Release/**'
 }
+checkpoint 'Completed tests'
