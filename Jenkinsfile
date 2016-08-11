@@ -1,7 +1,8 @@
 #!groovy​
 
-wrap([$class: 'TimestamperBuildWrapper']) {
-    node {
+
+node {
+	wrap([$class: 'TimestamperBuildWrapper']) {
 		// Mark the code checkout 'stage'....
 		stage 'Checkout'
 
@@ -19,5 +20,5 @@ wrap([$class: 'TimestamperBuildWrapper']) {
 		stage 'Stash/Archive build artifacts'
 		
 			archive 'MvcApplication/bin/Release/**'
-	}
+		}
 }
