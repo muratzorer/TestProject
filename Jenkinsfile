@@ -21,6 +21,7 @@ node { //node('windows') tags
 				try {
 					//archive 'MvcApplication/bin/Release/**'
 					stash name: "release", includes: "MvcApplication/bin/**"
+					true
 				} 
 				catch(error) {
 					timeout(time:30, unit:'SECONDS') {
