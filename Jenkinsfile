@@ -1,3 +1,5 @@
+#!groovy​
+
 node {
 	// Mark the code checkout 'stage'....
 	stage 'Checkout'
@@ -13,7 +15,13 @@ node {
 	
 		bat "\"${tool 'msbuild'}\" TestApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:VisualStudioVersion=12.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
 		
-	stage 'Archive build artifacts'
+	stage 'Stash/Archive build artifacts'
 	
-		archive 'MvcApplication/bin/Release/**'
+		stash 'MvcApplication/bin/Release/**'
+}
+
+checkpoint 'Completed tests'
+
+node {
+    echo 'deployment'
 }
