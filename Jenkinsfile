@@ -19,7 +19,7 @@ node { //node('windows') tags
 		stage 'Stash/Archive build artifacts'
 			waitUntil {
 				try {
-					//archive 'MvcApplication/bin/Release/**'
+					//archive 'MvcApplication/bin/**'
 					stash name: "release", includes: "MvcApplication/bin/**"
 					true
 				} 
@@ -30,5 +30,8 @@ node { //node('windows') tags
 					}
 				}
 			}
+		
+		stage 'Unit tests and Selenium Tests'
+			bat 'C:\Program Files (x86)\NUnit.org\nunit-console\nunit3-console.exe TestApplication.Tests\bin\Release\TestApplication.Tests.dll --result:nunit-result.xml;format=nunit3'
 	}
 }
