@@ -1,22 +1,23 @@
 #!groovy​
 
-node {
-	// Mark the code checkout 'stage'....
-	stage 'Checkout'
+wrap([$class: 'TimestamperBuildWrapper']) {
+    node {
+		// Mark the code checkout 'stage'....
+		stage 'Checkout'
 
-	   // Checkout code from repository
-	   checkout scm
+		   // Checkout code from repository
+		   checkout scm
+			
+		stage 'Nuget'
 		
-	stage 'Nuget'
-	
-		bat 'nuget restore TestApplication.sln'
+			bat 'nuget restore TestApplication.sln'
+			
+		stage 'MSBuild'
 		
-	stage 'MSBuild'
-	
-		bat "\"${tool 'msbuild'}\" TestApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:VisualStudioVersion=12.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+			bat "\"${tool 'msbuild'}\" TestApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:VisualStudioVersion=12.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+			
+		stage 'Stash/Archive build artifacts'
 		
-	stage 'Stash/Archive build artifacts'
-	
-		archive 'MvcApplication/bin/Release/**'
+			archive 'MvcApplication/bin/Release/**'
+	}
 }
-checkpoint 'Completed tests'
