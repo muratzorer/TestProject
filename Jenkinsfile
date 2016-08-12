@@ -1,6 +1,5 @@
 #!groovy​
 
-
 node { //node('windows') tags
 	wrap([$class: 'TimestamperBuildWrapper']) {
 		// Mark the code checkout 'stage'....
