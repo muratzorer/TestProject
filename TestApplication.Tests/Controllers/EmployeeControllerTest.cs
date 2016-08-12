@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -24,15 +23,10 @@ namespace TestApplication.Tests.Controllers
         public void Get()
         {
             IWebDriver driver = null;
-
-            ChromeOptions o = new ChromeOptions();
-            o.AddArgument("disable-extensions");
-            o.AddArgument("no-sandbox");
-
-            driver = new ChromeDriver(IE_DRIVER_PATH, o, TimeSpan.FromSeconds(180));
-
             try
             {
+                driver = new ChromeDriver(IE_DRIVER_PATH);
+
                 driver.Navigate().GoToUrl("http://localhost:60006/");
 
                 // Find the text input element by its name
@@ -54,8 +48,7 @@ namespace TestApplication.Tests.Controllers
 
                 TestEmployeeListScreen(driver, "AfterDelete");
             }
-            catch (Exception ex) 
-            {
+            catch (Exception ex) {
                 throw ex;
             }
             finally
