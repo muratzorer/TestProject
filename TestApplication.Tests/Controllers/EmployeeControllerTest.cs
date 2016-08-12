@@ -29,7 +29,7 @@ namespace TestApplication.Tests.Controllers
             o.AddArgument("disable-extensions");
             o.AddArgument("no-sandbox");
 
-            driver = new ChromeDriver(IE_DRIVER_PATH, o, TimeSpan.FromSeconds(180));
+            driver = new ChromeDriver(IE_DRIVER_PATH, o);
 
             try
             {
