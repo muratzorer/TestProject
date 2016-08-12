@@ -29,7 +29,7 @@ namespace TestApplication.Tests.Controllers
             o.AddArgument("disable-extensions");
             o.AddArgument("no-sandbox");
 
-            driver = new ChromeDriver(IE_DRIVER_PATH, o);
+            driver = new ChromeDriver(IE_DRIVER_PATH, o, TimeSpan.FromSeconds(180));
 
             try
             {
@@ -72,7 +72,7 @@ namespace TestApplication.Tests.Controllers
 
             //Find delete button and click
             IWebElement delBtn = driver.FindElement(By.Id("Delete"));
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(100));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             Thread.Sleep(1000);
             delBtn.Click(); //Perfome delete operation
             Thread.Sleep(1000);
@@ -86,7 +86,7 @@ namespace TestApplication.Tests.Controllers
             anchorTag.Click();
 
             //Wait and then check until the control with id=Name is available
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(100));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until((d) => { return d.FindElement(By.Id("Name")); });
 
             //Find all the lements
@@ -99,7 +99,7 @@ namespace TestApplication.Tests.Controllers
             submit.Click();
 
             IAlert alert = null;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(100));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until((d) => { alert = d.SwitchTo().Alert(); return alert; });
             alert.Accept();
         }
@@ -107,7 +107,7 @@ namespace TestApplication.Tests.Controllers
         private void TestAddEmployee(IWebDriver driver)
         {
             driver.FindElement(By.LinkText("Add")).Click();
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(100));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until((d) => { return d.FindElement(By.Id("Name")); });
 
             IWebElement name = driver.FindElement(By.Id("Name"));
@@ -119,7 +119,7 @@ namespace TestApplication.Tests.Controllers
             submit.Click();
 
             IAlert alert = null;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(100));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until((d) => { alert = d.SwitchTo().Alert(); return alert; });
             alert.Accept();
         }
@@ -127,7 +127,7 @@ namespace TestApplication.Tests.Controllers
 
         public void TestEmployeeListScreen(IWebDriver driver, string type)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(100));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until((d) => { return d.Title.ToLower().StartsWith("employeelist"); });
             IWebElement addLink = driver.FindElement(By.LinkText("Add"));
             IWebElement delLink = driver.FindElement(By.Id("Delete"));
