@@ -27,6 +27,7 @@ namespace TestApplication.Tests.Controllers
 
             ChromeOptions o = new ChromeOptions();
             o.AddArgument("disable-extensions");
+            o.AddArgument("no-sandbox");
 
             driver = new ChromeDriver(IE_DRIVER_PATH, o, TimeSpan.FromSeconds(180));
 
