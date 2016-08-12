@@ -24,13 +24,14 @@ namespace TestApplication.Tests.Controllers
         public void Get()
         {
             IWebDriver driver = null;
+
+            ChromeOptions o = new ChromeOptions();
+            o.AddArgument("disable-extensions");
+
+            driver = new ChromeDriver(IE_DRIVER_PATH, o);
+
             try
             {
-                ChromeOptions o = new ChromeOptions();
-                o.AddArgument("disable-extensions");
-
-                driver = new ChromeDriver(IE_DRIVER_PATH, o);
-
                 driver.Navigate().GoToUrl("http://localhost:60006/");
 
                 // Find the text input element by its name
@@ -52,7 +53,10 @@ namespace TestApplication.Tests.Controllers
 
                 TestEmployeeListScreen(driver, "AfterDelete");
             }
-            catch (Exception ex) { }
+            catch (Exception ex) 
+            {
+                throw ex;
+            }
             finally
             {
                 driver.Quit();
