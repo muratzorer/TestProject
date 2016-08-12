@@ -28,7 +28,7 @@ namespace TestApplication.Tests.Controllers
             ChromeOptions o = new ChromeOptions();
             o.AddArgument("disable-extensions");
 
-            driver = new ChromeDriver(IE_DRIVER_PATH, o);
+            driver = new ChromeDriver(IE_DRIVER_PATH, o, TimeSpan.FromSeconds(180));
 
             try
             {
