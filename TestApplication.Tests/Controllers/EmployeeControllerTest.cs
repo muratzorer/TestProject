@@ -25,7 +25,7 @@ namespace TestApplication.Tests.Controllers
             IWebDriver driver = null;
             try
             {
-                driver = new ChromeDriver(IE_DRIVER_PATH);
+                driver = new ChromeDriver(IE_DRIVER_PATH, null, TimeSpan.FromSeconds(180));
 
                 driver.Navigate().GoToUrl("http://localhost:60006/");
 
@@ -48,7 +48,7 @@ namespace TestApplication.Tests.Controllers
 
                 TestEmployeeListScreen(driver, "AfterDelete");
             }
-            catch (Exception ex) {
+            catch (Exception) {
                 throw;
             }
             finally
