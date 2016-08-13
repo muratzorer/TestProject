@@ -26,6 +26,7 @@ namespace TestApplication.Tests.Controllers
             try
             {
                 ChromeOptions opt = new ChromeOptions();
+                opt.AddArgument("--no-sandbox");
 
                 driver = new ChromeDriver(IE_DRIVER_PATH, opt, TimeSpan.FromSeconds(180));
 
