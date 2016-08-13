@@ -28,7 +28,7 @@ namespace TestApplication.Tests.Controllers
                 ChromeOptions opt = new ChromeOptions();
                 opt.AddArgument("--no-sandbox");
 
-                driver = new ChromeDriver(IE_DRIVER_PATH, opt, TimeSpan.FromSeconds(180));
+                driver = new ChromeDriver(IE_DRIVER_PATH, opt);
 
                 driver.Navigate().GoToUrl("http://localhost:60006/");
 
