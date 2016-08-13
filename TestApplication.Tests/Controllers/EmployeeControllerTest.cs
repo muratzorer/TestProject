@@ -53,7 +53,8 @@ namespace TestApplication.Tests.Controllers
             }
             finally
             {
-                driver.Quit();
+                if(driver != null)
+                    driver.Quit();
             }
         }
 
