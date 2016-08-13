@@ -49,7 +49,7 @@ namespace TestApplication.Tests.Controllers
                 TestEmployeeListScreen(driver, "AfterDelete");
             }
             catch (Exception ex) {
-                throw ex;
+                throw;
             }
             finally
             {
