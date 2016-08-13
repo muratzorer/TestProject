@@ -25,7 +25,9 @@ namespace TestApplication.Tests.Controllers
             IWebDriver driver = null;
             try
             {
-                driver = new ChromeDriver(IE_DRIVER_PATH, null, TimeSpan.FromSeconds(180));
+                ChromeOptions opt = new ChromeOptions();
+
+                driver = new ChromeDriver(IE_DRIVER_PATH, opt, TimeSpan.FromSeconds(180));
 
                 driver.Navigate().GoToUrl("http://localhost:60006/");
 
