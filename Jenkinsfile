@@ -37,7 +37,7 @@ node { //node('windows') tags
 			// CHANGE EXE NAME BEFORE PROD
 			bat "\"C:\\HTML Report\\NUnitHTMLReportGenerator.exe\" \"C:\\Program Files (x86)\\Jenkins\\workspace\\denemeMultiBranch\\master\\nunit-result.xml\""
 	
-		stage 'Publish Nunit Test Results'
-			publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'denemeMultiBranch/master', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
+		stage 'Publish Nunit Test Report'
+			publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
 	}
 }
