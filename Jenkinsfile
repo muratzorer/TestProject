@@ -33,8 +33,11 @@ node { //node('windows') tags
 		stage 'Unit tests and Selenium Tests'
 			bat "\"C:\\Program Files (x86)\\NUnit.org\\nunit-console\\nunit3-console.exe\" TestApplication.Tests\\bin\\Release\\TestApplication.Tests.dll --result:nunit-result.xml;format=nunit2"
 		
-		stage 'Convert test results to HTML'
+		stage 'Convert Nunit test results to HTML'
 			// CHANGE EXE NAME BEFORE PROD
 			bat "\"C:\\HTML Report\\NUnitHTMLReportGenerator.exe\" \"C:\\Program Files (x86)\\Jenkins\\workspace\\denemeMultiBranch\\master\\nunit-result.xml\""
+	
+		stage 'Publish Nunit Test Results'
+			publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'denemeMultiBranch/master', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
 	}
 }
