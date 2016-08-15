@@ -35,6 +35,6 @@ node { //node('windows') tags
 		
 		stage 'Convert test results to HTML'
 			// CHANGE EXE NAME BEFORE PROD
-			bat "C:\\HTML Report\\NUnitHTMLReportGenerator.exe C:\\Program Files (x86)\\Jenkins\\workspace\\denemeMultiBranch\\master\\nunit-result.xml"
+			bat "\"C:\\HTML Report\\NUnitHTMLReportGenerator.exe\" \"C:\\Program Files (x86)\\Jenkins\\workspace\\denemeMultiBranch\\master\\nunit-result.xml\""
 	}
 }
