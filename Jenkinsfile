@@ -31,6 +31,6 @@ node { //node('windows') tags
 			}
 		
 		stage 'Unit tests and Selenium Tests'
-			bat "\"C:\\Program Files (x86)\\NUnit.org\\nunit-console\\nunit3-console.exe\" TestApplication.Tests\\bin\\Release\\TestApplication.Tests.dll --result:nunit-result.xml;format=nunit2"
+			bat "\"C:\\Program Files (x86)\\NUnit.org\\nunit-console\\nunit3-console.exe\" TestApplication.Tests\\bin\\Release\\TestApplication.Tests.dll --result:nunit-result.xml;format=nunit2 /xml=nunit-result.xml"
 	}
 }
