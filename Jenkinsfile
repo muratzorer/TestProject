@@ -32,7 +32,7 @@ node { //node('windows') tags
 			}
 		
 		stage 'Unit tests and Selenium Tests'
-			bat "nunit3-console TestApplication.Tests\\bin\\Release\\TestApplication.Tests.dll --result:nunit-result.xml;format=nunit2"
+			bat 'nunit3-console TestApplication.Tests\\bin\\Release\\TestApplication.Tests.dll --result:nunit-result.xml;format=nunit2'
 		
 		stage 'Convert Nunit test results to HTML'
 			// CHANGE EXE NAME BEFORE PROD
