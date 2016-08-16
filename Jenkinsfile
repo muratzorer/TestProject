@@ -1,4 +1,5 @@
 #!groovy​
+// System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "sandbox; img-src 'self'; style-src 'unsafe-inline'")
 
 node { //node('windows') tags
 	wrap([$class: 'TimestamperBuildWrapper']) {
