@@ -22,7 +22,7 @@ node { //node('windows') tags
 					//archive 'MvcApplication/bin/**'
 					stash name: "release", includes: "MvcApplication/bin/**"
 					true
-				} 
+				}
 				catch(error) {
 					timeout(time:30, unit:'SECONDS') {
 						input "Retry the job ?"
@@ -36,7 +36,7 @@ node { //node('windows') tags
 		
 		stage 'Convert Nunit test results to HTML'
 			// CHANGE EXE NAME BEFORE PROD
-			bat "\"C:\\HTML Report\\NUnitHTMLReportGenerator.exe\" \"C:\\Program Files (x86)\\Jenkins\\workspace\\denemeMultiBranch\\master\\nunit-result.xml\""
+			bat "NUnitHTMLReportGenerator \"C:\\Program Files (x86)\\Jenkins\\workspace\\denemeMultiBranch\\master\\nunit-result.xml\""
 	
 		stage 'Publish Nunit Test Report'
 			publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
