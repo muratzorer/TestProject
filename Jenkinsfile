@@ -40,5 +40,8 @@ node { //node('windows') tags
 	
 		stage 'Publish Nunit Test Report'
 			publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
+			
+		stage 'SonarQube Analysis'
+			bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild"
 	}
 }
