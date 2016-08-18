@@ -1,5 +1,6 @@
 #!groovy​
 // System.setProperty("hudson.model.DirectoryBrowserSupport.CSP","img-src 'self'; style-src 'unsafe-inline'")
+// when to use like ${env.BUILD_NUMBER} ??
 
 node { //node('windows') tags
 	wrap([$class: 'TimestamperBuildWrapper']) {
@@ -13,7 +14,7 @@ node { //node('windows') tags
 			
 		stage 'MSBuild'
 			timeout(time:60, unit:'SECONDS') {
-				bat "\"${tool 'msbuild'}\" TestApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:VisualStudioVersion=12.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+				bat "\"${tool 'msbuild'}\" TestApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:VisualStudioVersion=12.0 /p:ProductVersion=1.0.0.%BUILD_NUMBER%"
 			}
 				
 		stage 'Stash/Archive build artifacts'
