@@ -42,6 +42,8 @@ node { //node('windows') tags
 			publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
 			
 		stage 'SonarQube Analysis'
+			bat 'MSBuild.SonarQube.Runner.exe begin /k:\"TestApplication\" /n:\"Test Application\" /v:1.0.0.${env.BUILD_NUMBER}'
 			bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild"
+			bat 'MSBuild.SonarQube.Runner.exe end'
 	}
 }
