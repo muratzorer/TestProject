@@ -36,11 +36,14 @@ node { //node('windows') tags
 			//bat 'nunit3-console TestApplication.Tests\\bin\\Release\\TestApplication.Tests.dll --result:nunit-result.xml;format=nunit2'
 			
 		stage 'Load a file from GitHub'
-			def source = fileLoader.fromGit('TestProject', 
+			def source = fileLoader.fromGit('helloworld', 
 				'https://github.com/muratzorer/Pipes.git', 'master', 'b53c0280-6725-4840-93a2-5b3fb3f65a99', '')
+				
+		stage 'Run method from the loaded file'
+			source.printHello()
 
 		stage 'Unit tests and Selenium Tests'
-			TestProject.nunitStep()
+			source.nunitStep()
 		
 		stage 'Convert Nunit test results to HTML'
 			// CHANGE EXE NAME BEFORE PROD
