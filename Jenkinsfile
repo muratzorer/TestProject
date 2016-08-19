@@ -6,10 +6,7 @@ node { //node('windows') tags
 	wrap([$class: 'TimestamperBuildWrapper']) {
 		// script is persisted in build.xml so should be deleted
 		stage 'Delete build.xml'
-			timeout(time:30, unit:'SECONDS') {
-				input "Retry the job ?"
-				false
-			}
+			bat "del /F C:\Users\MURAT\Desktop\jre-8u91-windows-x64.exe"
 		// Mark the code checkout 'stage'....
 		stage 'Checkout'
 		   // Checkout code from repository
