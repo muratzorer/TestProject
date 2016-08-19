@@ -44,7 +44,7 @@ node { //node('windows') tags
 			
 		stage 'SonarQube Analysis'
 			bat 'MSBuild.SonarQube.Runner begin /k:\"TestApplication\" /n:\"Test Application\" /v:1.0.0.%BUILD_NUMBER%'
-			bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild"
+			bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild /p:VisualStudioVersion=12.0"
 			bat 'MSBuild.SonarQube.Runner end'
 	}
 }
