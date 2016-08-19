@@ -4,6 +4,12 @@
 
 node { //node('windows') tags
 	wrap([$class: 'TimestamperBuildWrapper']) {
+		// script is persisted in build.xml so should be deleted
+		stage 'Delete build.xml'
+			timeout(time:30, unit:'SECONDS') {
+				input "Retry the job ?"
+				false
+			}
 		// Mark the code checkout 'stage'....
 		stage 'Checkout'
 		   // Checkout code from repository
