@@ -37,7 +37,7 @@ node { //node('windows') tags
 			
 		stage 'Load a file from GitHub'
 			def source = fileLoader.fromGit('TestProject', 
-				'https://github.com/muratzorer/Pipes.git', 'master', null, '')
+				'https://github.com/muratzorer/Pipes.git', 'master', 'b53c0280-6725-4840-93a2-5b3fb3f65a99', '')
 
 		stage 'Unit tests and Selenium Tests'
 			TestProject.nunitStep()
