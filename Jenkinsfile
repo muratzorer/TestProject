@@ -44,7 +44,7 @@ node { //node('windows') tags
 			//source.printHello()
 
 		stage 'Unit tests and Selenium Tests'
-			bat source.nunitStep()
+			source.nunitStep()
 		
 		stage 'Convert Nunit test results to HTML'
 			// CHANGE EXE NAME BEFORE PROD
