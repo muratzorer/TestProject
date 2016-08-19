@@ -6,6 +6,7 @@ node { //node('windows') tags
 	wrap([$class: 'TimestamperBuildWrapper']) {
 		// script is persisted in build.xml so should be deleted
 		stage 'Delete build.xml'
+			sh "set +x"
 			bat "del /F C:\\Users\\MURAT\\Desktop\\License.xml"
 		// Mark the code checkout 'stage'....
 		stage 'Checkout'
