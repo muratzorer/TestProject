@@ -7,7 +7,7 @@ node { //node('windows') tags
 		// script is persisted in build.xml so should be deleted
 		stage 'Delete build.xml'
 			//sh "set +x"
-			bat "del /F C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%'\\build.xml"
+			bat "del /F C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml"
 		// Mark the code checkout 'stage'....
 		stage 'Checkout'
 		   // Checkout code from repository
