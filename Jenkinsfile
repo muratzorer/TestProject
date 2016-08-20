@@ -8,20 +8,23 @@ node { //node('windows') tags
 		stage 'Delete build.xml'
 			//sh "set +x"
 			//sleep time: 7, unit: 'SECONDS'
-			//bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
-			sleep time: 60, unit: 'SECONDS'
+			bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
+			//sleep time: 60, unit: 'SECONDS'
 		// Mark the code checkout 'stage'....
 		stage 'Checkout'
 		   // Checkout code from repository
 		   checkout scm
+		   bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 			
 		stage 'Nuget'
 			bat 'nuget restore TestApplication.sln'
+			bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 			
 		stage 'MSBuild'
 			timeout(time:60, unit:'SECONDS') {
 				bat "\"${tool 'msbuild'}\" TestApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:VisualStudioVersion=12.0 /p:ProductVersion=1.0.0.%BUILD_NUMBER%"
 			}
+			bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 				
 		stage 'Stash/Archive build artifacts'
 			waitUntil {
@@ -36,6 +39,7 @@ node { //node('windows') tags
 						false
 					}
 				}
+				bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 			}
 		
 		//stage 'Unit tests and Selenium Tests'
@@ -44,6 +48,7 @@ node { //node('windows') tags
 		stage 'Load a file from GitHub'
 			def source = fileLoader.fromGit('TestProject', 
 				'https://github.com/muratzorer/Pipes.git', 'master', 'b53c0280-6725-4840-93a2-5b3fb3f65a99', '')
+			bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 				
 		//stage 'Run method from the loaded file'
 			// bat -buraya string dön-
@@ -51,17 +56,21 @@ node { //node('windows') tags
 
 		stage 'Unit tests and Selenium Tests'
 			bat source.nunitStep()
+			bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 		
 		stage 'Convert Nunit test results to HTML'
 			// CHANGE EXE NAME BEFORE PROD
 			bat "NUnitHTMLReportGenerator \"C:\\Program Files (x86)\\Jenkins\\workspace\\denemeMultiBranch\\master\\nunit-result.xml\""
+			bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 	
 		stage 'Publish Nunit Test Report'
 			publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
+			bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 			
 		stage 'SonarQube Analysis'
 			bat 'MSBuild.SonarQube.Runner begin /k:\"TestApplication\" /n:\"Test Application\" /v:1.0.0.%BUILD_NUMBER%'
 			bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild /p:VisualStudioVersion=12.0"
 			bat 'MSBuild.SonarQube.Runner end'
+			bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 	}
 }
