@@ -8,7 +8,7 @@ node { //node('windows') tags
 		stage 'Delete build.xml'
 			//sh "set +x"
 			sleep time: 30, unit: 'SECONDS'
-			bat "del /F C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\139\\build.xml"
+			bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 		// Mark the code checkout 'stage'....
 		stage 'Checkout'
 		   // Checkout code from repository
