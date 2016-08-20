@@ -39,8 +39,8 @@ node { //node('windows') tags
 						false
 					}
 				}
-				bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 			}
+			bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 		
 		//stage 'Unit tests and Selenium Tests'
 			//bat 'nunit3-console TestApplication.Tests\\bin\\Release\\TestApplication.Tests.dll --result:nunit-result.xml;format=nunit2'
