@@ -45,8 +45,9 @@ node { //node('windows') tags
 				
 			stage 'Load a file from GitHub'
 				// 'b53c0280-6725-4840-93a2-5b3fb3f65a99' murat-pc
+				// 'b32da5ab-259e-4a44-a626-484d7af6e0ac' t1lprvt1869
 				def source = fileLoader.fromGit('TestProject', 
-					'https://github.com/muratzorer/Pipes.git', 'master', null, '')
+					'https://github.com/muratzorer/Pipes.git', 'master', 'b32da5ab-259e-4a44-a626-484d7af6e0ac', '')
 					
 			//stage 'Run method from the loaded file'
 				// bat -buraya string dön-
