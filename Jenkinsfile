@@ -75,5 +75,3 @@ node { //node('windows') tags
 		//sleep time: 45, unit: 'SECONDS'
 	}
 }
-
-bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
