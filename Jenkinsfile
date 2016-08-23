@@ -75,7 +75,7 @@ node { //node('windows') tags
 			archiveArtifacts artifacts: '**/*.log'
 
 			// Now delete the unneeded directories
-			dir('C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\7') {
+			dir('C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\9') {
 				deleteDir()
 			}
 		}
