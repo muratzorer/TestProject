@@ -1,6 +1,8 @@
 #!groovy​
 // System.setProperty("hudson.model.DirectoryBrowserSupport.CSP","img-src 'self'; style-src 'unsafe-inline'")
 // when to use like ${env.BUILD_NUMBER} ??
+// FEATURES:
+// - isminde Test geçen csproj'ları sonar'a yollamıyor.
 
 node { //node('windows') tags
 	try
@@ -71,10 +73,9 @@ node { //node('windows') tags
 			// First save out anything you want
 			stage 'Archive'
 			archiveArtifacts artifacts: '**/*.log'
-			sleep time: 10, unit: 'SECONDS' 
 
 			// Now delete the unneeded directories
-			dir('C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\${env.BUILD_NUMBER}') {
+			dir('C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%') {
 				deleteDir()
 			}
 		}
