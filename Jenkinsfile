@@ -34,7 +34,7 @@ node { //node('windows') tags
 					}
 					catch(error) {
 						timeout(time:30, unit:'SECONDS') {
-							input "Retry the job ?"
+							input message:'Retry the job ?', submitter: 'it-ops'
 							false
 						}
 					}
@@ -67,12 +67,22 @@ node { //node('windows') tags
 				bat 'MSBuild.SonarQube.Runner begin /k:\"TestApplication\" /n:\"Test Application\" /v:1.0.0.%BUILD_NUMBER%'
 				bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild /p:VisualStudioVersion=12.0"
 				bat 'MSBuild.SonarQube.Runner end'
+				
+			// First save out anything you want
+			stage 'Archive'
+			archiveArtifacts artifacts: '**/*.log'
+			sleep time: 10, unit: 'SECONDS' 
+
+			// Now delete the unneeded directories
+			dir('C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\${env.BUILD_NUMBER}') {
+				deleteDir()
+			}
 		}
 	}
 	finally
 	{
-		bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
-		bat "notepad /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
+		//bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
+		//bat "notepad /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 		//sleep time: 45, unit: 'SECONDS'
 	}
 }
