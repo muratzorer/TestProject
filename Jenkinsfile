@@ -24,7 +24,7 @@ node { //node('windows') tags
 			timeout(time:60, unit:'SECONDS') {
 				bat "\"${tool 'msbuild'}\" TestApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:VisualStudioVersion=12.0 /p:ProductVersion=1.0.0.%BUILD_NUMBER%"
 			}
-				
+		/*		
 		stage 'Stash/Archive build artifacts'
 			waitUntil {
 				try {
@@ -39,7 +39,7 @@ node { //node('windows') tags
 					}
 				}
 			}
-		
+		*/
 		//stage 'Unit tests and Selenium Tests'
 			//bat 'nunit3-console TestApplication.Tests\\bin\\Release\\TestApplication.Tests.dll --result:nunit-result.xml;format=nunit2'
 			
