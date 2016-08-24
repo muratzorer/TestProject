@@ -6,13 +6,6 @@
 
 node { //node('windows') tags
 	wrap([$class: 'TimestamperBuildWrapper']) {
-		// script is persisted in build.xml so should be deleted
-		stage 'Delete build.xml'
-			//sh "set +x"
-			//sleep time: 7, unit: 'SECONDS'
-			bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
-			//sleep time: 60, unit: 'SECONDS'
-		// Mark the code checkout 'stage'....
 		stage 'Checkout'
 		   // Checkout code from repository
 		   checkout scm
@@ -24,22 +17,6 @@ node { //node('windows') tags
 			timeout(time:60, unit:'SECONDS') {
 				bat "\"${tool 'msbuild'}\" TestApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:VisualStudioVersion=12.0 /p:ProductVersion=1.0.0.%BUILD_NUMBER%"
 			}
-		/*		
-		stage 'Stash/Archive build artifacts'
-			waitUntil {
-				try {
-					//archive 'MvcApplication/bin/**'
-					stash name: "release", includes: "MvcApplication/bin/**"
-					true
-				}
-				catch(error) {
-					timeout(time:30, unit:'SECONDS') {
-						input message:'Retry the job ?', submitter: 'it-ops'
-						false
-					}
-				}
-			}
-		*/
 		//stage 'Unit tests and Selenium Tests'
 			//bat 'nunit3-console TestApplication.Tests\\bin\\Release\\TestApplication.Tests.dll --result:nunit-result.xml;format=nunit2'
 			
@@ -58,7 +35,7 @@ node { //node('windows') tags
 		
 		stage 'Convert Nunit test results to HTML'
 			// CHANGE EXE NAME BEFORE PROD
-			bat "NUnitHTMLReportGenerator @"C:\\Program Files (x86)\\Jenkins\\workspace\\denemeMultiBranch\\master\\nunit-result.xml""
+			bat "NUnitHTMLReportGenerator \"C:\\Program Files (x86)\\Jenkins\\workspace\\denemeMultiBranch\\master\\nunit-result.xml\""
 	
 		stage 'Publish Nunit Test Report'
 			publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
@@ -68,14 +45,28 @@ node { //node('windows') tags
 			bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild /p:VisualStudioVersion=12.0"
 			bat 'MSBuild.SonarQube.Runner end'
 			
-		// First save out anything you want
-		stage 'Archive'
-			//archiveArtifacts artifacts: '**/*.log'
+		/*		
+		stage 'Stash and upload build artifacts'
+			waitUntil {
+				try {
+					//archiveArtifacts 'MvcApplication/bin/**'
+					//archiveArtifacts artifacts: '** /*.log'
+					stash name: "release", includes: "MvcApplication/bin/**"
+					true
+				}
+				catch(error) {
+					timeout(time:30, unit:'SECONDS') {
+						input message:'Retry the job ?', submitter: 'it-ops'
+						false
+					}
+				}
+			}
 			
-			//bat "del /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\9\\build.xml\""
-			//bat "notepad /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
-			//sleep time: 45, unit: 'SECONDS'
-			// Now delete the unneeded directories
+			// curl upload artifacts
+		*/
+		
+		// First save out anything you want
+		stage 'Cleanup temps'
 			build job: 'denemePipe', quietPeriod: 5, wait: false, parameters: [[$class: 'StringParameterValue', name: 'path', value: "C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\${env.BUILD_NUMBER}\\build.xml"]]
 	}
 }
