@@ -76,10 +76,6 @@ node { //node('windows') tags
 			//bat "notepad /F \"C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\%BUILD_NUMBER%\\build.xml\""
 			//sleep time: 45, unit: 'SECONDS'
 			// Now delete the unneeded directories
-			
+			build job: 'denemePipe', quietPeriod: 5, wait: false
 	}
-}
-
-dir('C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\15') {
-	deleteDir()
 }
