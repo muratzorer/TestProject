@@ -6,10 +6,10 @@
 
 
 
-def node = fileLoader.fromGit('ProjectName', 
+def nodes = fileLoader.fromGit('ProjectNameNodes', 
 	'https://github.com/muratzorer/Pipes.git', 'master', null, '')
 
-node.EchoNode()
+nodes.EchoNode()
 
 /*
 node() {
