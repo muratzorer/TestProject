@@ -1,5 +1,7 @@
 #!groovy​
 // System.setProperty("hudson.model.DirectoryBrowserSupport.CSP","img-src 'self'; style-src 'unsafe-inline'")
+// from https://github.com/danielpalme/ReportGenerator/wiki/Integration -->
+// System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "sandbox allow-scripts; default-src 'self';")
 // when to use like ${env.BUILD_NUMBER} ??
 // FEATURES:
 // - isminde Test geçen csproj'ları sonar'a yollamıyor.
