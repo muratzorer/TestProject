@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using TestApplication.Models;
+using MvcApplication;
 
 namespace TestApplication.Tests
 {

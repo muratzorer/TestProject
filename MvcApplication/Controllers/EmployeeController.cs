@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TestApplication.Models;
 
-namespace TestApplication.Controllers
+namespace MvcApplication
 {
     public class EmployeeController : Controller
     {
